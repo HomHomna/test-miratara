@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.label {
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 6px;
+  display: flex;
+}
+
+.star {
+  color: #ff4d4f;
+}
+
+.error {
+  color: #ff4d4f;
+  min-height: 22px;
+}
