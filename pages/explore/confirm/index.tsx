@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Layout from "@/components/layout/Layout";
-import { useRouter } from "next/router";
-import DetailScreen from '@/features/explore/screen/detail'
+import ConfirmScreen from '@/features/explore/screen/confirm'
 
-export default function Detail(props: any) {
-  const { query } = useRouter()
+export default function Confirm(props: any) {
   const [focusField, setFocusField] = useState<boolean>(false)
 
   useEffect(() => {
@@ -21,14 +19,12 @@ export default function Detail(props: any) {
       document.removeEventListener('click', handleOutsideClick);
     }
   }, [focusField])
-
   return (
     <Layout menu={props.menu} setMenu={props.setMenu}>
-      <DetailScreen
-        focusField={focusField}
-        setFocusField={setFocusField}
-        id={query?.['hotel-id']}
-      />
+      <ConfirmScreen 
+      focusField={focusField}
+        setFocusField={setFocusField} 
+        />
     </Layout>
   );
 }

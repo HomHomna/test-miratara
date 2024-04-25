@@ -65,7 +65,7 @@
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: absolute;
-  top:calc(100% + 5px) ;
+  top: calc(100% + 5px);
   left: 0;
   z-index: 100;
   border-radius: 6px;
@@ -80,13 +80,13 @@
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: absolute;
-  top:calc(100% + 5px) ;
+  top: calc(100% + 5px);
   left: 0;
   z-index: 100;
   border-radius: 6px;
   border: none;
   padding: 1rem;
-  transition: opacity 0.3s, height 0.3s; 
+  transition: opacity 0.3s, height 0.3s;
 }
 
 .number_stays_layout {
@@ -98,7 +98,7 @@
 
 .layout_field_amount {
   display: grid;
-  grid-template-columns: minmax(50px,10%) minmax(60px,15%) minmax(50px,10%);
+  grid-template-columns: minmax(50px, 10%) minmax(60px, 15%) minmax(50px, 10%);
   align-items: baseline;
   justify-content: end;
 }
@@ -124,9 +124,9 @@
 }
 
 .card {
-display: flex;
-flex-direction: column;
-gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .card_recent_layout {
@@ -208,4 +208,9 @@ gap: 15px;
   font-size: 16px;
   color: #2D3DDF;
   font-family: Poppins-SemiBold;
+}
+
+.image {
+  /* -webkit-mask-image:  url(/images/filter_blue.png); */
+  mask-image: url(/images/taj_mahal.png);
 }

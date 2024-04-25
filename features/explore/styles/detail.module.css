@@ -1,0 +1,107 @@
+.container {
+  display: flex;
+  width: 95%;
+  flex-direction: column;
+}
+
+.line_vertical {
+  height: 42px;
+  border-right: 1px solid #BEC3FF;
+  margin-top: -7px;
+  margin-bottom: -7px;
+  /* background-color: black; */
+  width: 10px;
+}
+
+.layout_search {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 15%;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn_search {
+  font-size: 22px;
+  width: 256px;
+  height: 42px;
+  border-radius: 4px;
+}
+
+.number_stays_layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+}
+
+.layout_field_amount {
+  display: grid;
+  grid-template-columns: minmax(50px, 10%) minmax(60px, 15%) minmax(50px, 10%);
+  align-items: baseline;
+  justify-content: end;
+}
+
+.layout_detail {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  height: 100% !important;
+}
+
+.layout_detail_image {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: repeat(3, 33%);
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.amenities_box {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
+}
+
+.card_recent_layout {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 144px auto;
+  height: 144px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 4px;
+}
+
+.card_detail {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30px;
+}
+
+.book_now_text {
+  width: 100%;
+  height: 100%;
+  background: #2D3DDF;
+  border-radius: 4px;
+  height: 64px;
+  width: 144px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: Poppins-Bold;
+  font-size: 12px;
+  transform: rotate(90deg);
+  margin-right: -10px;
+  cursor: pointer;
+}
+
+.price {
+  color: #2D3DDF;
+  font-size: 22px;
+  font-family: Poppins-SemiBold;
+}
