@@ -56,6 +56,7 @@ body {
 
 .field_number_stays.open {
   display: flex;
+  flex-direction: column;
   opacity: 100%;
   width: 100%;
   height: fit-content;
@@ -68,5 +69,12 @@ body {
   border-radius: 6px;
   border: none;
   padding: 1rem;
-  transition: opacity 0.5s, height 1s ease-in-out; 
+  transition: opacity 0.5s, height 1s linear; 
+}
+
+.ant-picker .ant-picker-input span.ant-picker-suffix,
+.ant-picker.ant-picker-range span.ant-picker-suffix {
+  margin-left: 1px;
+  margin-right: 10px;
+  order: -1;
 }

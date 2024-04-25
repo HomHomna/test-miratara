@@ -10,4 +10,5 @@
 .content {
   width: 100%;
   padding: 43px 0px 0px 30px;
+  margin-left: calc(88px + (157 - 88) * ((100vw - 320px) / (1980 - 320)));
 }

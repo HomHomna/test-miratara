@@ -5,6 +5,7 @@
   grid-area: menu;
   border-top-right-radius: 39px;
   border-bottom-right-radius: 39px;
+  position: fixed;
 }
 
 .content {

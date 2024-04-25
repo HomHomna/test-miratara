@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { Field, Form, useForm } from '@/components/form'
 import styles from '../styles/screen.module.css'
-import { Hotel, Flight, Car, PinLocate } from '@/components/icons'
+import { Hotel, Flight, Car, PinLocate, People, Calendar } from '@/components/icons'
 import { Button, ConfigProvider } from 'antd'
 import Recent from './Recent'
 
@@ -86,6 +86,7 @@ const SearchSection: React.FC<Props> = (props) => {
   const form = useForm({
     initialValues: {
       location: null,
+      date:null,
       adult: 1,
       children: 1,
       room: 1,
@@ -93,7 +94,7 @@ const SearchSection: React.FC<Props> = (props) => {
     rules: {}
   })
 
-  const { values, handlerChange } = form
+  const { values, handlerChange, setValues } = form
 
   const Icon = useCallback((iconName: keyof typeof mappingTransaction, { ...props }) => {
     const IconResult = mappingTransaction[iconName]
@@ -110,6 +111,13 @@ const SearchSection: React.FC<Props> = (props) => {
       setFocusField(true);
     } else {
       setFocusField(false);
+      handlerChange((prev: any) => ({
+        ...prev,
+        adult: values?.adult,
+        children: values?.children,
+        room: values?.room,
+        number_stays:`${values?.adult} adult, ${values?.children} children, ${values?.room} room`
+      }))
     }
   };
 
@@ -149,6 +157,8 @@ const SearchSection: React.FC<Props> = (props) => {
           <Field.RangePicker
             name="date"
             separator={<div className={styles.line_vertical}></div>}
+            suffixIcon={<Calendar />}
+            format={'ddd,DD MMM-YYYY'}
           />
 
           <div style={{ width: '100%', position: 'relative' }} id="number_stays" >
@@ -157,6 +167,7 @@ const SearchSection: React.FC<Props> = (props) => {
               id='field_number_stays'
               readOnly={true}
               onFocus={handleFocus}
+              prefix={<People />}
               // onBlur={() => {
               //   setFocusField(false)
               // }}
@@ -265,7 +276,16 @@ const SearchSection: React.FC<Props> = (props) => {
                 </div>
               </div>
               <div className={styles.btn_number_stays}>
-                <Button onClick={() => setFocusField(false)} type='primary'>Save</Button>
+                <Button onClick={() => {
+                  setFocusField(false)
+                  handlerChange((prev: any) => ({
+                    ...prev,
+                    adult: values?.adult,
+                    children: values?.children,
+                    room: values?.room,
+                    number_stays:`${values?.adult} adult, ${values?.children} children, ${values?.room} room`
+                  }))
+                }} type='primary'>Save</Button>
               </div>
             </div>
 
@@ -284,7 +304,10 @@ const SearchSection: React.FC<Props> = (props) => {
           {/* </ConfigProvider> */}
         </Form>
       </div>
-      <Recent data={mock_data_api_recent || []} />
+      <div style={{ marginTop: '40px' }}>
+        <div className={styles.recent_text}>Recent Searches</div>
+        <Recent data={mock_data_api_recent || []} />
+      </div>
     </div>
   )
 }
