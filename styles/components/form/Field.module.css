@@ -19,3 +19,13 @@
   color: #ff4d4f;
   min-height: 22px;
 }
+
+.select_with_prefix {
+  display: flex;
+  gap: 46px ;
+  align-items: center;
+}
+
+/* .select_field {
+  borderColor: 1px solid red;
+} */

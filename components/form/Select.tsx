@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo } from 'react';
-import { Form, Select, Empty } from 'antd';
+import { Form, Select, Empty, ConfigProvider } from 'antd';
 import { FormContext } from '@olapat/react-useform';
 import {
   getValues,
@@ -22,7 +22,8 @@ interface Props extends Omit<SelectProps<any>, 'name' | 'options' | 'onChange'>,
   name: string
   options: Record<string, any>[],
   optKeys: string[]
-  onChange?: (name: string, value: any) => void
+  onChange?: (name: string, value: any) => void,
+  prefix?: Node | string | any
 }
 
 const SelectInput = (props: Props) => {
@@ -39,6 +40,7 @@ const SelectInput = (props: Props) => {
     optKeys: keys,
     style,
     showSearch,
+    prefix,
     ...propsInput
   } = props;
   const { locale } = useRouter();
@@ -74,6 +76,14 @@ const SelectInput = (props: Props) => {
     },
     [formContext, name, onChange]
   );
+  console.log('prefix----->>>>>',
+    <>
+      <>
+        {prefix}
+        &nbsp; {props.placeholder}
+      </> : {props.placeholder}
+    </>
+  );
 
   return (
     <div className={`${styles.container} ${_error ? 'a-error' : ''}`}>
@@ -84,38 +94,63 @@ const SelectInput = (props: Props) => {
         </label>
       )}
       <div id={selectId}>
-        <Select
-          showSearch={showSearch || true}
-          getPopupContainer={() => document.getElementById(selectId) as HTMLElement}
-          optionFilterProp="label"
-          filterOption={(input, option) => {
-            if (typeof option?.label === 'string') {
-              return option?.label.toLowerCase().indexOf(input.toLowerCase()) === 0
-            } else {
-              return false
-            }
+        {/* #BEC3FF */}
+        <ConfigProvider
+          theme={{
+            token: {
+              colorBorder: '#BEC3FF',
+            },
           }}
-          notFoundContent={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-          value={_value}
-          disabled={_disabled}
-          onChange={_onChange}
-          size="large"
-          style={{ width: '100%', ...style }}
-          {...propsInput}
         >
-          {!!options?.length &&
-            options.map((item, index) => (
-              <Option
-                key={index}
-                {...(item.props || {})}
-                value={item[keys[0]]}
-                label={item[keys[1]] || '-'}
-                disabled={item?.disabled || false}
-              >
-                {item[keys[1]] || '-'}
-              </Option>
-            ))}
-        </Select>
+          <Select
+            className={styles.select_field}
+            showSearch={showSearch || true}
+            optionLabelProp={'label'}
+            getPopupContainer={() => document.getElementById(selectId) as HTMLElement}
+            // optionFilterProp={keys[0]}
+            // optionFilterProp="label"
+            filterOption={(input, option) => {
+              if (typeof option?.label === 'string') {
+                return option?.label.toLowerCase().indexOf(input.toLowerCase()) === 0
+              } else {
+                return false
+              }
+            }}
+            notFoundContent={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+            value={_value}
+            disabled={_disabled}
+            onChange={_onChange}
+            size="large"
+            style={{ width: '100%', ...style }}
+            {...propsInput}
+            placeholder={
+              prefix ?
+                <div className={styles.select_with_prefix}>
+                  {prefix}
+                  &nbsp; {props.placeholder}
+                </div> : props.placeholder
+            }
+          >
+            {!!options?.length &&
+              options.map((item, index) => (
+                <Option
+                  key={index}
+                  {...(item.props || {})}
+                  value={item[keys[0]]}
+                  label={prefix ?
+                    <div className={styles.select_with_prefix}>
+                      {prefix}
+                      &nbsp; {item[keys[1]] || '-'}
+                    </div>
+                    : item[keys[1]] || '-'
+                  }
+                  disabled={item?.disabled || false}
+                >
+                  {item[keys[1]] || '-'}
+                </Option>
+              ))}
+          </Select>
+        </ConfigProvider>
       </div>
       {!!_errorWithLocal &&
         <span className={`${styles.error}`}>{_errorWithLocal}</span>

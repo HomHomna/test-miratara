@@ -226,6 +226,13 @@ const TextInput = (props: Props) => {
         </label>
       )}
       {/* <ConfigProvider locale={datePickerTh}> */}
+      <ConfigProvider
+        theme={{
+          token: {
+            colorBorder: '#BEC3FF',
+          },
+        }}
+      >
         <RangePicker
           name={name}
           value={_value}
@@ -236,8 +243,11 @@ const TextInput = (props: Props) => {
           {...propsInput}
           style={{ width: '100%', ...(propsInput.style || {}) }}
         />
+      </ConfigProvider>
       {/* </ConfigProvider> */}
-      <span className={`${styles.error}`}>{_errorWithLocal}</span>
+      {_errorWithLocal &&
+        <span className={`${styles.error}`}>{_errorWithLocal}</span>
+      }
     </div>
   );
 };

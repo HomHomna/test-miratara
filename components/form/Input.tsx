@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo } from 'react'
-import { Form, Input } from 'antd'
+import { Form, Input, ConfigProvider } from 'antd'
 import { FormContext } from '@olapat/react-useform'
 import {
   getValues,
@@ -84,15 +84,23 @@ const TextInput = (props: Props) => {
           {label}
         </label>
       )}
-      <Input
-        name={name}
-        value={_value}
-        disabled={_disabled}
-        onChange={_onChange}
-        size="large"
-        maxLength={maxLength || 255}
-        {...propsInput}
-      />
+      <ConfigProvider
+        theme={{
+          token: {
+            colorBorder: '#BEC3FF',
+          },
+        }}
+      >
+        <Input
+          name={name}
+          value={_value}
+          disabled={_disabled}
+          onChange={_onChange}
+          size="large"
+          maxLength={maxLength || 255}
+          {...propsInput}
+        />
+      </ConfigProvider>
       {!!_errorWithLocal &&
         <span className={`${styles.error}`}>{_errorWithLocal}</span>
       }

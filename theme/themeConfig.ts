@@ -6,6 +6,7 @@ const theme: ThemeConfig = {
     fontSize: 16,
     colorPrimary: '#2D3DDF',
     fontFamily: 'Poppins-Regular',
+    
   },
   components: {
     Table: {
