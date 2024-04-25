@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import Layout from "@/components/layout/Layout";
 
-export default function Profile() {
+export default function Profile(props: any) {
   return (
-    <div>profile page</div>
+    <Layout menu={props.menu} setMenu={props.setMenu}>
+      <div>profile page</div>
+    </Layout>
   );
 }

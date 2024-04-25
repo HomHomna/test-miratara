@@ -7,8 +7,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const [menu, setMenu] = useState<string | null>('Explore')
 
   return (
-    <Layout menu={menu} setMenu={setMenu}>
-      <Component {...pageProps} menu={menu}/>
-    </Layout>
+    // <Layout menu={menu} setMenu={setMenu}>
+      <Component {...pageProps} menu={menu} setMenu={setMenu}/>
+    // </Layout>
   )
 }

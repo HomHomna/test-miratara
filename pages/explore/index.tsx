@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import ExploreScreen from "@/features/explore/screen"
+import Layout from "@/components/layout/Layout";
 
-export default function Explore() {
+export default function Explore(props: any) {
   const [focusField, setFocusField] = useState<boolean>(false)
 
   useEffect(() => {
@@ -21,10 +22,12 @@ export default function Explore() {
 
   return (
     <div>
-      <ExploreScreen
-        focusField={focusField}
-        setFocusField={setFocusField}
-      />
+      <Layout menu={props.menu} setMenu={props.setMenu}>
+        <ExploreScreen
+          focusField={focusField}
+          setFocusField={setFocusField}
+        />
+      </Layout>
     </div>
   );
 }

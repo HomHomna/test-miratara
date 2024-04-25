@@ -4,7 +4,8 @@ import styles from '../styles/screen.module.css'
 import { Hotel, Flight, Car, PinLocate, People, Calendar } from '@/components/icons'
 import { Button, ConfigProvider } from 'antd'
 import Recent from './Recent'
-
+import dayjs from 'dayjs'
+import { useRouter } from 'next/router'
 interface Props {
   focusField: boolean
   setFocusField: Function
@@ -82,18 +83,18 @@ const mock_data_api_recent = [
 const SearchSection: React.FC<Props> = (props) => {
   const { focusField, setFocusField } = props
   const [typeSelect, setTypeSelect] = useState<string>('hotel')
-
+  const { push } = useRouter()
   const form = useForm({
     initialValues: {
       location: null,
-      date:null,
+      date: [null, null],
       adult: 1,
       children: 1,
       room: 1,
     },
     rules: {}
   })
-
+  
   const { values, handlerChange, setValues } = form
 
   const Icon = useCallback((iconName: keyof typeof mappingTransaction, { ...props }) => {
@@ -101,8 +102,19 @@ const SearchSection: React.FC<Props> = (props) => {
     return <IconResult {...props} />
   }, [])
 
-  const handlerSubmit = (value: any) => {
-
+  const handlerSubmit = (values: any) => {
+    const body = {
+      location: values?.location || undefined,
+      adult: values?.adult || undefined,
+      children: values?.children || undefined,
+      room: values?.room || undefined,
+      start_date: values?.date[0] ? dayjs(values?.date[0]).format('YYYY-MM-DD') : '',
+      end_date: values?.date[1] ? dayjs(values?.date[1]).format('YYYY-MM-DD') : '',
+    }
+    const currentUrl = global.location.origin
+    const queryString = new URLSearchParams(body).toString();
+    const url = `${currentUrl}/explore/search?${queryString}`;
+    push(url)
   }
 
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
@@ -116,7 +128,7 @@ const SearchSection: React.FC<Props> = (props) => {
         adult: values?.adult,
         children: values?.children,
         room: values?.room,
-        number_stays:`${values?.adult} adult, ${values?.children} children, ${values?.room} room`
+        number_stays: `${values?.adult} adult, ${values?.children} children, ${values?.room} room`
       }))
     }
   };
@@ -283,7 +295,7 @@ const SearchSection: React.FC<Props> = (props) => {
                     adult: values?.adult,
                     children: values?.children,
                     room: values?.room,
-                    number_stays:`${values?.adult} adult, ${values?.children} children, ${values?.room} room`
+                    number_stays: `${values?.adult} adult, ${values?.children} children, ${values?.room} room`
                   }))
                 }} type='primary'>Save</Button>
               </div>
