@@ -15,14 +15,18 @@ const Recent: React.FC<Props> = (props) => {
       {data?.map((item: any, index: number) => {
         return (
           <div key={index} className={styles.card_recent_layout}>
-            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+            <div style={{ width: '200px', height: '173px', position: 'relative' }}>
               <Image
                 alt={item.name}
                 // width={200}
                 // height={173}
-                layout='fill'
-                objectFit='contain'
+                // layout='fill'
+                // objectFit='contain'
                 src={item.image_url}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: '100%', height: '100%',borderRadius:'10px' }}
               />
             </div>
           </div>
